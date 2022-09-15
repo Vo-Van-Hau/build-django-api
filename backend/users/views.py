@@ -25,14 +25,15 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             # The newly created User using UserCreationForm() will set is_superuser and is_staff as False but is_active set to True.
-            form.save()  
+            form.save(form)  
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('blog-home')
+            messages.success(request, f'Account created for {username}!, you are now able to login !!!')
+            return redirect('signin')
         else:
             messages.warning(request, 'The credentials is not valid')
             return redirect('signup')
     else:
         return HttpResponse(template.render(context, request))
  
+
