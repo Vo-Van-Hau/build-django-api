@@ -1,0 +1,12 @@
+{% extends "layouts/master.html" %}
+{%block content %}
+    <div class="container-section my-3 border p-3">
+        <div class="media d-flex border border-dark border-opacity-10 rounded p-3">
+            <img class="border border-warning rounded-circle account-img" src="{{ user.profile.image.url }}" width="54px" height="54px">
+            <div class="media-body ms-2">
+                <h2 class="media-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>  
+    </div>
+{% endblock %}

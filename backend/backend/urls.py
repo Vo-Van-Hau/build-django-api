@@ -19,6 +19,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from rest_framework import routers   
 from users import views as user_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()                   
 router.register(r'users', user_view.UsersView, 'users') 
@@ -27,7 +29,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('blog/', include('blog.urls')),
+    path('users/', include('users.urls')),
     path('signup/', user_view.signup, name = 'signup'),  
     path('signin/', auth_views.LoginView.as_view(template_name = 'signin.html'), name = 'signin'), 
     path('logout/', auth_views.LogoutView.as_view(), name = 'logout'), 
-]
+]  
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -1,16 +1,17 @@
 from rest_framework import viewsets  
 from .serializers import UsersSerializer 
-from .models import Users
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 class UsersView(viewsets.ModelViewSet):
     serializer_class = UsersSerializer   
-    queryset = Users.objects.all() 
+    queryset = User.objects.all() 
 
 
 def signup(request):
@@ -35,5 +36,14 @@ def signup(request):
             return redirect('signup')
     else:
         return HttpResponse(template.render(context, request))
+
+
+@login_required
+def profile(request):
+    template = loader.get_template('profile.html')
+    context = {
+        'title': 'Your Profile',
+    }
+    return HttpResponse(template.render(context, request))
  
 
