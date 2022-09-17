@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError  
 from django.forms.fields import EmailField  
 from django.forms.forms import Form  
+from .models import Profile
   
 class CustomUserCreationForm(UserCreationForm):  
     
@@ -49,3 +50,14 @@ class CustomUserCreationForm(UserCreationForm):
             self.cleaned_data['password1']  
         )  
         return user
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']

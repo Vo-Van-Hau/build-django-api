@@ -28,3 +28,5 @@ class Profile(models.Model):
     """
     def _str_(self):
         return f'{self.user.username} Profile'
+
+
