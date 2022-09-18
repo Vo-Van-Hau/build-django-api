@@ -1,0 +1,8 @@
+{% extends "layouts/master.html" %}
+{%block content %}
+<div>
+    <h1>{{ object.title }}</h1>
+    <p>By {{ object.author }} on {{ object.date_posted }}</p>
+    <p>{{ object.content }}</p>
+</div>
+{% endblock content %}

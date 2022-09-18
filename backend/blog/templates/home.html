@@ -1,10 +1,39 @@
 {% extends "layouts/master.html" %}
 {%block content %}
-<div>
-    {% for post in posts %}
-        <h1>{{ post.title }}</h1>
-        <p>By {{ post.author }} on {{ post.date_posted }}</p>
-        <p>{{ post.content }}</p>
-    {% endfor %}
+<div class="">
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+                    <img src="{{ post.author.profile.image.url }}" class="card-img-top" alt="Loading..." style="max-height: 18rem">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text text-truncate">
+                            {{ post.content }}
+                        </p>
+                        <p>By {{ post.author }} on {{ post.date_posted }}</p>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">Read more</a>
+                            </div>
+                            <div class="d-flex">
+                                <a class="btn btn-sm btn-warning me-2" href="{% url 'post-update' post.id %}">Edit</a>
+                                <a class="btn btn-sm btn-danger"  href="{% url 'post-delete' post.id %}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4"></div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <button class="btn btn-outline-primary w-100" type="button">View more</button>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4"></div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
